@@ -11,7 +11,6 @@
 
 import csv
 
-
 def ej3():
     print('Ejercicio de archivos CSV 1º')
     archivo = 'stock.csv'
@@ -28,6 +27,20 @@ def ej3():
 
     # Comenzar aquí, recuerde el identado dentro de esta funcion
     
+    suma = 0
+    
+    with open ('archivos_python\stock.csv') as csvfile:
+        stock = list(csv.DictReader(csvfile))
+    
+    for row in stock:
+        for item, cantidad in row.items():
+            if item == 'tornillos':
+                suma += int(cantidad)
+   
+    print ("El total de tornillos es =", suma)
+    csvfile.close()       
+
+
 
 
 def ej4():
@@ -47,6 +60,24 @@ def ej4():
     # utilizando "try except", tema que se verá la clase que viene.
 
     # Comenzar aquí, recuerde el identado dentro de esta funcion
+    
+    cant_2amb = 0
+    cant_3amb = 0
+
+    with open ('archivos_python\propiedades.csv') as csvfile:
+        propiedades = list(csv.DictReader(csvfile))
+
+    for row in propiedades:
+        try:
+            if row['ambientes'] == '2':
+                cant_2amb += 1
+            elif row['ambientes'] == '3':
+                cant_3amb += 1
+        except:
+            print('No hay departamentos de 2 o 3 ambientes')
+    
+    print('La cantidad de deptos de 2 ambientes es:', cant_2amb, 'y de 3 ambientes:', cant_3amb)
+    csvfile.close()    
 
 
 if __name__ == '__main__':
